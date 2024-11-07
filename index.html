@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+  
+
+.button:disabled {
+  pointer-events: none;
+}
+
+.button:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+
+    html, body {
+      height: 100%; /* Set height of html and body to 100% */
+    }
+
+    body {
+      background-color: rgb(253, 252, 241);
+    }
+
+    .main {
+      width: 100%;
+      height: 100%;
+      padding: 20px; /* Add padding to the main container if needed */
+    }
+    .button-group {
+       display: flex; /* Use flexbox for layout */
+       justify-content: space-between; /* Add space between buttons */
+       align-items: ri; /* Center items vertically */
+       margin-top:25px;
+       margin-bottom: 60px; /* Add margin at the bottom */
+       border-bottom: 5px solid black; /* Add a border line under the buttons */
+}
+    .ff{
+      font-size:x-large;
+    }
+    .button {
+      appearance: none;
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: #3B3B3B;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 0;
+  outline: none;
+  padding: 5px 8px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 25%;
+  will-change: transform;
+    }
+
+    .larger-font {
+        font-size: 20px; /* Adjust the font size as needed */
+    }
+
+    .larger-code {
+        font-family: monospace; /* Optional: Use a monospaced font for code */
+        font-size: 18px; /* Adjust the font size as needed */
+    }
+    .larger-font2{
+        font-size: 30px; /* Adjust the font size as needed */
+    }
+    .image-group {
+        display: flex;
+        flex-direction: column;
+        width: 75%; /* Adjust the width as needed */
+        height: auto; /* Adjust the height as needed */
+        margin-bottom: 20px; /* Adjust the margin as needed */
+    }
+    .image img {
+        width: 40%; /* Ensures images fill the container */
+        height: auto; /* Maintains aspect ratio */
+    }
+    .image-group img {
+        width: 90vw; /* Ensures images fill the container */
+        height: auto; /* Maintains aspect ratio */
+    }
+
+    .imagec img {
+        width: 25%; /* Ensures images fill the container */
+        height: auto; /* Maintains aspect ratio */
+    }
+    .image_gr img{
+      width: 90vw; /* Ensures images fill the container */
+        height: auto; /* Maintains aspect ratio */
+    }
+    .container {
+  position: relative;
+  display: flex;
+  height: 626px; width: 70vw;
+}
+.tabs-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%; /* Adjust as needed */
+      z-index: 1000; /* Ensure it's above other content */
+    }
+.tabs {
+  position: relative;
+  top: 124px;
+  left: 10px;/* here*/
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  height: 464px; width: 66px;
+  user-select: none;
+  
+}
+
+.tabs>input {
+  position: absolute !important;
+  height: 1px !important;
+  width: 1px !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+}
+
+.tab {
+  position: relative;
+  left: 6px;
+  height: 34px; width: 66px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 40px; line-height: 34px;
+  font-family: sans-serif; font-weight: bold;
+  text-align: center;
+  color: #f9f9f7;
+  background-color: #79726c;
+  filter: drop-shadow(-2px 8px 4px #0008);
+  transition: 0.3s ease;
+}
+.tab:nth-of-type(1) { z-index: 6; }
+.tab:nth-of-type(2) { z-index: 5; }
+.tab:nth-of-type(3) { z-index: 4; }
+.tab:nth-of-type(4) { z-index: 3; }
+.tab:nth-of-type(5) { z-index: 2; }
+.tab:nth-of-type(6) { z-index: 1; }
+.tab:nth-of-type(7) { z-index: 0; }
+
+.tab::before,
+.tab::after {
+  content: "";
+  position: absolute;
+  left: 0; z-index: -1;
+  width: 100%;
+  border-radius: 6px 4px 4px 6px;
+  background-color: inherit;
+  background-image: inherit;
+}
+.tab::before {
+  bottom: 16px; height: 126px;
+  transform: skewy(-28deg);
+}
+.tab::after {
+  top: 16px; height: 40px;
+  transform: skewy(28deg);
+}
+
+.tabs > input:not(:checked) + .tab:hover {
+  background-color: #aba5a0;
+  cursor: pointer;
+}
+
+.tabs > input:checked + .tab {
+  left: 0; z-index: 7;
+  background-color: #d8cec1;
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/08/03/16/seamless-1807376_960_720.jpg");
+  color: #393534;
+}
+
+.tab .vertical {
+  position: absolute;
+  left: 10px; top: -85px;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-shadow: 0 0 2px currentcolor;
+}
+.tab .vertical1 {
+  position: absolute;
+  left: 10px; top: -30px;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-shadow: 0 0 2px currentcolor;
+}
+#result{
+margin-left: 90px;
+}
+  </style>
+</head>
+<body>
+  <div class="main">
+    <section class="container">
+      <div class="tabs-container">
+        <div class="tabs">
+          <input type="radio" name="tabs" id="tab0" checked onclick="handleTabClick(0)">
+          <label for="tab0" class="tab"><span class="vertical">Start</span></label>
+          <input type="radio" name="tabs" id="tab1" onclick="handleTabClick(1)"><label for="tab1" class="tab"><span class="vertical1">Analyze</span></label>
+          <input type="radio" name="tabs" id="tab2" onclick="handleTabClick(2)"><label for="tab2" class="tab"><span class="vertical1">Task_2</span></label>
+          <input type="radio" name="tabs" id="tab3" onclick="handleTabClick(3)"><label for="tab3" class="tab"><span class="vertical1">Task_3</span></label>
+          <input type="radio" name="tabs" id="tab4" onclick="handleTabClick(4)"><label for="tab4" class="tab"><span class="vertical1">Task_4</span></label>
+        </div>
+      </div>
+      
+      <div class="dcontent">
+        <!-- Content for each tab goes here -->
+        <p id="result"><b>   </b><br>
+          <b>Student’s names:</b><br>
+          •	azdasher_339717 (Azdasher Mohammad Zogbe, Student ID: 339717)<br>
+          •	ahmad_332223 (Ahmad Yossuf Alasaad, Student ID: 332223)</p>
+      </div>
+    </section>
+  </div>
+  
+  <!-- JavaScript to handle tab clicks -->
+  <script>
+    // Function to handle tab clicks
+    function handleTabClick(tabIndex) {
+      switch (tabIndex) {
+        case 0:
+          clearResult();
+          break;
+        case 1:
+          Analyze();
+          break;
+        case 2:
+          Task_2();
+          break;
+        case 3:
+          Task_3();
+          break;
+        case 4:
+          Task_4();
+          break;
+        default:
+          break;
+      }
+    }
+
+    // Add event listeners to tab elements
+    document.addEventListener("DOMContentLoaded", function() {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          handleTabClick(index);
+        });
+      });
+    });
+    function Analyze() {   
+      document.getElementById("result").innerHTML = `<p class="larger-font"><b>Analyzing the company's data:</b><br>
+      Using <code class="larger-code">df. describe(include='all')</code> we find the following metrics:<br>
+      - The highest unit price is 100.<br>
+      - The highest MSRP (Manufacturer suggested selling Price) is 214.<br>
+      - Minimum year: 2003.<br>
+      - Maximum year: 2005.<br>
+      - The dataset contains information from 2003-01-06 to 2005-05-31.<br>
+      - No numbers are negative, and no MONTH_ID exceeds 12 or QUARTER_ID exceeds 4.<p>
+      ----------------------------------------------------------------------------------------------------------------------------------------
+      <p class="larger-font">Using <code class="larger-code">sum(df.duplicated())</code> we find: <br>
+      - There are no duplicated rows.<p>
+      -----------------------------------------------------------------------------------------------------------------------------------------
+      <p class="larger-font">Using <code class="larger-code">df.isnull().sum()</code> we find:<br>
+      - There are 4 columns that have null value: ADDRESSLINE2, STATE, POSTCODE, and TERRITORY.<br>
+      <br>
+      We replace null values in object columns with the most frequent value in the same column using:<p>
+      <code class="larger-code">df_clean=df.apply(lambda x: x.fillna(x.value_counts().index[0]))<br>
+      df_clean</code><br>
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------
+      <p class="larger-font">Using <code class="larger-code">df.dtypes:</code><br>
+      - There is one column (ORDERDATE) need to change its data type from Object into Datetime type.<br>
+      Change the Data type for 'ORDERDATE' column into datetime:<p><br>
+      <code  class="larger-code">df_clean['ORDERDATE']=pd.to_datetime(df_clean['ORDERDATE'])</code><br>
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------
+      <p class="larger-font">There are errors in SALES column because it doesn’t equal QUANTITYORDERED * PRICEEACH:<br>
+      # Calculate the correct SALES:<p>
+      <code class="larger-code">df['SALES']= df['QUANTITYORDERED']*df['PRICEEACH']<br>
+      df.head()</code><br>
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------
+      <p class="larger-font"><b>Understanding the data:</b><br>
+      The company has 7 product lines (Classic Cars, Motorcycles, Planes, Ships, Trains, Trucks and Buses, Vintage Cars) and produces in each line a number of models:<br>
+      <br>
+      <b>Product Lines:</b><br>
+      1) Classic Cars: Number of Models: 37<br>
+      Product Codes: ['S10_1949','S10_4757','S10_4962','S12_1099','S12_1108', 'S12_3148', 'S12_3380', 'S12_3891' ,'S12_3990', 'S12_4675', 'S18_1129' ,'S18_1589', 'S18_1889' ,'S18_1984' ,'S18_2238', 'S18_2870', 'S18_3232' ,'S18_3278', 'S18_3482', 'S18_3685', 'S18_4027', 'S18_4721' ,'S18_4933' ,'S24_1046', 'S24_1444' ,'S24_1628', 'S24_2766', 'S24_2840', 'S24_2887' ,'S24_2972','S24_3191', 'S24_3371', 'S24_3432' ,'S24_3856', 'S24_4048' ,'S24_4620' ,'S700_2824']<br>
+      <br>
+      2) Motorcycles: Number of Models: 13<br>
+      Product Codes: ['S10_1678' , 'S10_2016' , 'S10_4698' , 'S12_2823' , 'S18_2625' , 'S18_3782' , 'S24_1578' , 'S24_2000' , 'S24_2360' , 'S32_1374' , 'S32_2206', 'S32_4485', 'S50_4713']<br>
+      <br>
+      3) Planes: Number of Models: 12<br>
+      Product Codes: ['S18_1662', 'S18_2581', 'S24_1785','S24_2841', 'S24_3949','S24_4278', 'S700_1691', 'S700_2466','S700_2834', 'S700_3167’,'S700_4002’,'S72_1253']<br>
+      <br>
+      4) Ships: Number of Models: 9<br>
+      Product Codes: ['S18_3029' , 'S24_2011' , 'S700_1138' ,'S700_1938' ,'S700_2047', 'S700_2610' ,'S700_3505' ,'S700_3962', 'S72_3212']<br>
+      <br>
+   
+        5) Trains: Number of Models: 3<br>
+        Product Codes: ['S18_3259', 'S32_3207', 'S50_1514']<br>
+        <br>
+        6) Trucks and Buses: Number of Models: 11<br>
+        Product Codes: ['S12_1666' , 'S12_4473' , 'S18_1097' , 'S18_2319' , 'S18_2432' , 'S18_4600' , 'S24_2300' , 'S32_1268' , 'S32_2509' , 'S32_3522' , 'S50_1392']<br>
+        <br>
+        7) Vintage Cars: Number of Models: 24<br>
+        Product Codes: ['S18_1342' , 'S18_1367' , 'S18_1749' , 'S18_2248' , 'S18_2325' , 'S18_2795' , 'S18_2949' , 'S18_2957' , 'S18_3136' , 'S18_3140' , 'S18_3320' , 'S18_3856' , 'S18_4409' , 'S18_4522' , 'S18_4668' , 'S24_1937' , 'S24_2022' , 'S24_3151' , 'S24_3420' , 'S24_3816' , 'S24_3969' , 'S24_4258' , 'S32_4289' , 'S50_1341']<br>
+        <p>
+          -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        <p class="larger-font"><b>Sales Distribution:</b><br>
+
+Countries where Products are Sold:<br>
+USA, France, Norway, Australia, Finland, Austria, UK, Spain, Sweden, Singapore, Canada, Japan, Italy, Denmark, Belgium, Philippines, Germany, Switzerland, Ireland.<p>
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<p class="larger-font"># Using only required fileds in homework body and other columns which we need it to implement required tasks in the homework:<p>
+<code class="larger-code">df_clean = df_clean[['ORDERNUMBER','PRODUCTCODE','PRODUCTLINE','QUANTITYORDERED', 'PRICEEACH','SALES', 'ORDERDATE','MONTH_ID','YEAR_ID','ADDRESSLINE1','CITY']]<br>
+df_clean.head()</code><br>
+<p class="larger-font"># Rename the column to be more descriptive, we will rename all columns depending on their order in dataframe:<p>
+<code class="larger-code">df_clean.columns =['Order_ID', 'Product','Product_Line','Quantity_Ordered' , 'Price_Each','Sales','Order_Date','Month_ID','Year_ID','Purchase_Address','City']<br>
+df_clean.head()<br><br></code>
+`;
+        } 
+    function clearResult() {
+      document.getElementById("result").innerHTML = `<b>Group ID: 4747</b><br>
+      <b>Student’s names:</b><br>
+    •	azdasher_339717 (Azdasher Mohammad Zogbe, Student ID: 339717)<br>
+    •	ahmad_332223 (Ahmad Yossuf Alasaad, Student ID: 332223)`;
+    }
+    function Task_2() {
+          document.getElementById("result").innerHTML = ``;
+ 
+
+// First group of images with an image before it
+var imageContainer1 = document.createElement("div");
+    imageContainer1.setAttribute("class", "image");
+
+    // Paragraph before the first group
+    var para1 = document.createElement("p");
+    para1.innerHTML = `<p class="larger-font">#2- Calulate metrics (total_revenue , total_units_sold , average_price_per_product , total_number_of_orders) for each Product:<p>`;
+    para1.classList.add("larger-font"); // Add larger font class
+    document.getElementById("result").appendChild(para1);
+
+    // Python code for the first group
+    var code1 = document.createElement("code");
+    code1.innerHTML = `<br>product_result=df_clean.groupby('Product').agg(total_rev=('Quantity_Ordered', lambda x: (x * df_clean.loc[x.index, 'Price_Each']).sum()),<br>
+                                         total_units_sold=('Quantity_Ordered', 'sum'),<br>
+                                         AVG_price_per_product=('Price_Each','mean'),<br>
+                                         total_Num_of_ord=('Order_ID', 'nunique'),)<br>
+product_result<br>
+`;
+    code1.classList.add("larger-code"); // Add larger font class
+    document.getElementById("result").appendChild(code1);
+    
+    // Inserting line break
+    document.getElementById("result").appendChild(document.createElement("br")); 
+
+    var image1 = document.createElement("img");
+    image1.src = "show_metrics.png";
+    imageContainer1.appendChild(image1);
+  // Append the first group to the result element
+  document.getElementById("result").appendChild(imageContainer1);
+    var textElement1 = document.createElement("p");
+    textElement1.innerHTML = `----------------------------------------------------------------------------------------------------------------------------------------<br>
+    -	we must sort the products by the previous metrics in descending order using the (sort_values()) function, and print the top 5 products using the (head()) function:<br>
+<br>
+# Rank the products based on previous metrics and provide recommendations on which products the company should focus on selling more:`;
+  
+
+    textElement1.classList.add("larger-font"); // Add larger font class                              
+    document.getElementById("result").appendChild(textElement1);
+    
+    // Inserting line break
+    document.getElementById("result").appendChild(document.createElement("br")); 
+
+    var code2 = document.createElement("code");
+    code2.innerHTML = `columns_to_sort_by = ['total_revenue', 'total_units_sold', 'average_price_per_product', 'total_number_of_orders']<br>
+sorted_results = {}<br>
+for column in columns_to_sort_by:<br>
+    sorted_results[column] = product_result.sort_values(by=column, ascending=False)<br>
+for column, sorted_result in sorted_results.items():<br>
+    print(f"Sorted by '{column}':")<br>
+    print(sorted_result)<br>
+    print("\n")<br>
+# Provide recommendations based on the sorted DataFrame (5 products):<br>
+top_products = sorted_result.head(5)<br>
+print(f"These products have highest ({column}):")<br>
+print("\n")<br>
+print(top_products)<br>
+print("\n")<br>
+<br>----------------------------------------------------------------------------------------------------------------------------------------`;
+    code2.classList.add("larger-code"); // Add larger font class
+    document.getElementById("result").appendChild(code2);
+
+    var textElement2 = document.createElement("p");
+    textElement2.innerHTML = `<p class="larger-font">
+  <b<From this sorted output we find the following:</b><br>
+- These products have highest (total_rev): (S18_3232, S24_3856, S18_4600, S24_2300, S18_2238).<br>
+- These products have highest (total_units_sold): (S18_3232, S24_3856, S18_4600, S700_4002, S12_4473).<br>
+- These products have highest (AVG_price_product): (S10_1949, S24_2300, S18_4027, S18_3482, S18_2238).<br>
+- These products have highest (total_Num_of_ord): (S18_3232, S10_1949, S24_1444, S10_4962, S24_2840).<br><br>
+
+      <b>Recommending’s:</b><br>
+- The company should focus on selling more of the top products that generate the highest revenue (S18_3232, S24_3856, S18_4600, S24_2300, S18_2238).<br>
+- The company should keep ensuring sufficient inventory and marketing efforts for products with highest number of orders (S18_3232, S10_1949, S24_1444, S10_4962, S24_2840).<br><br><p>
+`;
+    textElement2.classList.add("larger-font2"); // Add larger font class                              
+    document.getElementById("result").appendChild(textElement2);
+
+    }
+
+function Task_3() {
+    document.getElementById("result").innerHTML = `<p class="larger-font">- First, we have to add a new column containing the year and month to group the data using it:<br>
+    # Extract the year and month from the Order_Date column and put it in a new column Year_Month:</p><br>
+    <code class="larger-code">df_clean['Year_Month'] = df_clean['Order_Date'].dt.strftime('%Y-%m')</code><br>
+    -----------------------------------------------------------------------------------
+    `;
+
+    // First group of images with an image before it
+    var imageContainer1 = document.createElement("div");
+    imageContainer1.setAttribute("class", "image-group");
+
+    // Paragraph before the first group
+    var para1 = document.createElement("p");
+    para1.innerHTML = `- Now we can calculate the metrics:<br>
+                       # Compute the metrics for each month:<br>
+                       # MOY mean (month of the year):`;
+    para1.classList.add("larger-font"); // Add larger font class
+    document.getElementById("result").appendChild(para1);
+
+    // Python code for the first group
+    var code1 = document.createElement("code");
+    code1.innerHTML = `monthly_metrics1= df_clean.groupby('Year_Month').agg(
+                       MOY_Revenue=('Quantity_Ordered', lambda x: (x * df_clean.loc[x.index, 'Price_Each']).sum()),<br>
+                       MOY_Units_Sold=('Quantity_Ordered', 'sum'),<br>
+                       MOY_Average_Price=('Price_Each', 'mean'))<br>
+    monthly_metrics1<br><br>`;
+    code1.classList.add("larger-code"); // Add larger font class
+    document.getElementById("result").appendChild(code1);
+      // Image before the first group
+      var beforeImage1 = document.createElement("img");
+    beforeImage1.src = "Month1.png"; // Replace with the path to your image
+    beforeImage1.classList.add("before-image"); // Add a class for styling if needed
+    document.getElementById("result").appendChild(beforeImage1);
+
+    var image1 = document.createElement("img");
+    image1.src = "Monthly_revenue.png";
+    imageContainer1.appendChild(image1);
+
+    var image2 = document.createElement("img");
+    image2.src = "Monthly_units_sold.png";
+    imageContainer1.appendChild(image2);
+
+    var image3 = document.createElement("img");
+    image3.src = "Monthly_Average_price.png";
+    imageContainer1.appendChild(image3);
+
+    // Inserting line break
+    document.getElementById("result").appendChild(document.createElement("br"));
+
+    // Append the first group to the result element
+    document.getElementById("result").appendChild(imageContainer1);
+
+    // Second group of images with an image before it
+    var imageContainer2 = document.createElement("div");
+    imageContainer2.setAttribute("class", "image-group");
+
+
+    // Paragraph before the second group
+    var para2 = document.createElement("p");
+    para2.innerHTML = `-----------------------------------------------------------------------------------<br>
+                      - Also, we can group the data depending on the (Month_ID) column, but in this case, the Data will be grouped by month regardless of the year:<br>
+                      # Show the monthly result of (total revenue generated, total units sold, and average price per unit) in each month:<br>`;
+    para2.classList.add("larger-font"); // Add larger font class                  
+    document.getElementById("result").appendChild(para2);
+
+    // Python code for the second group
+    var code2 = document.createElement("code");
+    code2.innerHTML = `monthly_metrics2 = df_clean.groupby('Month_ID').agg(
+                       total_revenue=('Quantity_Ordered', lambda x: (x * df_clean.loc[x.index, 'Price_Each']).sum()),<br>
+                       total_units_sold=('Quantity_Ordered', 'sum'),<br>
+                       average_price_per_unit=('Price_Each', 'mean'))<br>
+    monthly_metrics2<br><br>`;
+    code2.classList.add("larger-code"); // Add larger font class
+    document.getElementById("result").appendChild(code2);
+
+    // Image before the second group
+    var beforeImage2 = document.createElement("img");
+    beforeImage2.src = "Month2.png"; // Replace with the path to your image
+    beforeImage2.classList.add("before-image"); // Add a class for styling if needed
+    document.getElementById("result").appendChild(beforeImage2);
+
+    var image4 = document.createElement("img");
+    image4.src = "Monthly_revenue2.png";
+    imageContainer2.appendChild(image4);
+
+    var image5 = document.createElement("img");
+    image5.src = "Monthly_units_sold2.png";
+    imageContainer2.appendChild(image5);
+
+    var image6 = document.createElement("img");
+    image6.src = "Monthly_Average_price2.png";
+    imageContainer2.appendChild(image6);
+
+    // Append the second group to the result element
+    document.getElementById("result").appendChild(imageContainer2);
+
+    // Text after the groups of images
+    var textAfterImages = document.createElement("p");
+    textAfterImages.innerHTML = `-----------------------------------------------------------------------------------<br>
+                                - By comparing results in the previous two methods, we notice that the sales increased in the eleventh month, so the company can consider:<br>
+                                  1- Making offers in other months. <br>
+                                  2- Focusing on top products that sold in the eleventh month.<br><br>`;
+    textAfterImages.classList.add("larger-font2"); // Add larger font class                              
+    document.getElementById("result").appendChild(textAfterImages);
+}
+
+function Task_4() {
+document.getElementById("result").innerHTML = `<p class="larger-font">#4 Calculate total sales in each city:<br>
+ <code class="larger-code">city_sales = df_clean.groupby('City').apply(lambda x: (x['Sales']).sum())</code><br><br>
+# Sort by total sales:<br>
+<code class="larger-code">sorted_city_sales = city_sales.sort_values(ascending=False)<br>
+sorted_city_sales</code><br><br>
+#4 Identify the top 5 cities with the highest sales:<br>
+<code class="larger-code">sorted_city_sales.head(5)</code><br>
+<br>
+<table style="border-collapse: collapse; width: 50%;">
+  <tr>
+    <th style="text-align: center; padding: 8px; border: 1px solid #dddddd;">City</th>
+    <th style="text-align: center; padding: 8px; border: 1px solid #dddddd;">Sales</th>
+  </tr>
+  <tr>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">Madrid</td>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">902094.19</td>
+  </tr>
+  <tr>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">San Rafael</td>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">530587.19</td>
+  </tr>
+  <tr>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">NYC</td>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">450418.63</td>
+  </tr>
+  <tr>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">Singapore</td>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">227985.50</td>
+  </tr>
+  <tr>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">Paris</td>
+    <td style="text-align: center; padding: 8px; border: 1px solid #dddddd;">212959.82</td>
+  </tr>
+</table>
+
+`;
+    // First group of images with an image before it
+    var imageContainer1 = document.createElement("div");
+    imageContainer1.setAttribute("class", "image-group");
+var para1 = document.createElement("p");
+    para1.innerHTML = `-يمكن استخدام طريقة التقويم المتقاطع لتقييم مجموعة نماذج التعلم. نعرف في الشيفرة البرمجية       والتي نمرر لها مجموعة من نماذج التعلمclassification_comparison_cv التالية المخصصة    والبيانات كلها models وعدد الحاويا ت(y_test,X_test ) تعيد هذ الدالة إطار بيانات  cv يظهر مقياس الصحة لكل نموذج مما يسمح بالمقارنة بينهم`;
+    para1.classList.add("larger-font"); // Add larger font class
+    document.getElementById("result").appendChild(para1);
+
+    // Python code for the first group
+    var code1 = document.createElement("code");
+    code1.innerHTML = `monthly_metrics1= df_clean.groupby('Year_Month').agg(
+                       MOY_Revenue=('Quantity_Ordered', lambda x: (x * df_clean.loc[x.index, 'Price_Each']).sum()),<br>
+                       MOY_Units_Sold=('Quantity_Ordered', 'sum'),<br>
+                       MOY_Average_Price=('Price_Each', 'mean'))<br>
+    monthly_metrics1<br><br>`;
+    code1.classList.add("larger-code"); // Add larger font class
+    document.getElementById("result").appendChild(code1);
+      // Image before the first group
+      var Image1 = document.createElement("img");
+    Image1.src = "Month1.png"; // Replace with the path to your image
+    Image1.classList.add("image"); // Add a class for styling if needed
+    document.getElementById("result").appendChild(Image1);
+}
+  </script> 
+</body>
+</html>
